@@ -1,8 +1,8 @@
 $totalItems = 0
 $processedItems = 0
 
-# This function retrieves the duplicate status of the items in the given path
-function Get-DuplicateStatus($rootPath, $fieldName) {
+# This function finds and removes duplicate items in the given path
+function FindAndRemoveDuplicateItems($rootPath, $fieldName) {
     $hash = New-Object "System.Collections.Generic.Dictionary``2[System.String,System.Collections.Generic.Dictionary``2[System.String,PSObject]]"
     $root = Get-Item -Path $rootPath
     $status = Get-Duplicates $root $fieldName
@@ -83,5 +83,5 @@ function RemoveOldDuplicates($hash) {
     }
 }
 
-#Use this function first the root path, and then the field you want to compare which the item seems to be duplicated by. 
-Get-DuplicateStatus "/sitecore/content/DMC/DMCGlobal/Data/IR Direct News Articles dups" "Id"
+# Use this function to find and remove duplicate items by passing the root path and the field to compare by
+FindAndRemoveDuplicateItems "/sitecore/content/DMC/DMCGlobal/Data/IR Direct News Articles new duplicates" "Id"
